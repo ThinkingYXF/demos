@@ -1,37 +1,95 @@
 <template>
   <div class="hello">
-    <h1>{{ msg }}</h1>
-    <p>
-      For a guide and recipes on how to configure / customize this project,<br>
-      check out the
-      <a href="https://cli.vuejs.org" target="_blank" rel="noopener">vue-cli documentation</a>.
-    </p>
-    <h3>Installed CLI Plugins</h3>
-    <ul>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-babel" target="_blank" rel="noopener">babel</a></li>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-eslint" target="_blank" rel="noopener">eslint</a></li>
-    </ul>
-    <h3>Essential Links</h3>
-    <ul>
-      <li><a href="https://vuejs.org" target="_blank" rel="noopener">Core Docs</a></li>
-      <li><a href="https://forum.vuejs.org" target="_blank" rel="noopener">Forum</a></li>
-      <li><a href="https://chat.vuejs.org" target="_blank" rel="noopener">Community Chat</a></li>
-      <li><a href="https://twitter.com/vuejs" target="_blank" rel="noopener">Twitter</a></li>
-      <li><a href="https://news.vuejs.org" target="_blank" rel="noopener">News</a></li>
-    </ul>
-    <h3>Ecosystem</h3>
-    <ul>
-      <li><a href="https://router.vuejs.org" target="_blank" rel="noopener">vue-router</a></li>
-      <li><a href="https://vuex.vuejs.org" target="_blank" rel="noopener">vuex</a></li>
-      <li><a href="https://github.com/vuejs/vue-devtools#vue-devtools" target="_blank" rel="noopener">vue-devtools</a></li>
-      <li><a href="https://vue-loader.vuejs.org" target="_blank" rel="noopener">vue-loader</a></li>
-      <li><a href="https://github.com/vuejs/awesome-vue" target="_blank" rel="noopener">awesome-vue</a></li>
-    </ul>
+
+    <div>
+      <div class="test">
+        <el-button @click="test">测试</el-button>
+        <el-select v-model="selected">
+          <el-option v-for="(item, index) in selects" :key="index"
+          :value="item.id" :label="item.name"></el-option>
+        </el-select>
+        <el-button @click="submit">提交</el-button>
+      </div>
+
+      <el-table
+        :data="tableData"
+        style="width: 100%">
+        <el-table-column
+          label="日期"
+          width="180">
+          <template slot-scope="scope">
+            <i class="el-icon-time"></i>
+            <span style="margin-left: 10px">{{ scope.row.date }}</span>
+          </template>
+        </el-table-column>
+        <el-table-column
+          label="姓名"
+          width="180">
+          <template slot-scope="scope">
+            <div slot="reference" class="name-wrapper">
+              <el-tag size="medium">{{ scope.row.name }}</el-tag>
+            </div>
+          </template>
+        </el-table-column>
+        <el-table-column label="操作">
+          <template slot-scope="scope">
+            <el-select v-model="scope.row.$index" filterable placeholder="请选择">
+              <el-option
+                v-for="item in options"
+                :key="item.value"
+                :label="item.label"
+                :value="item.value">
+              </el-option>
+            </el-select>
+          </template>
+        </el-table-column>
+      </el-table>
+    </div>
   </div>
 </template>
 
 <script>
 export default {
+  data() {
+    return {
+      tableData: [],
+      options: [],
+
+
+      selects: [{id: 1, name: 'yxf'}, {id: 2, name: 'zy'}],
+      selected: 1
+    }
+  },
+  created(){
+    this.$api.post('/tableList').then(json=>{
+      this.tableData = json.data.data;
+    })
+    this.$api.get('/getFoods').then(json=>{
+      this.options = json.data.data;
+    })
+  },
+  methods: {
+    test(){
+      let lastSelected = '';
+      if(this.selected){
+        this.selects.forEach(element=>{
+          if(element.id == this.selected){
+            lastSelected = element;
+            return false;
+          }
+        })
+      }
+
+      this.selects = [lastSelected];
+      let arr = [{id: 3, name: 'zs'}, {id: 4, name: 'ls'}];
+      arr.forEach(element=>{
+        this.selects.push(element);
+      })
+    },
+    submit(){
+      console.log(this.selected);
+    }
+  },
   name: 'HelloWorld',
   props: {
     msg: String
@@ -48,10 +106,10 @@ ul {
   list-style-type: none;
   padding: 0;
 }
-li {
+/* li {
   display: inline-block;
   margin: 0 10px;
-}
+} */
 a {
   color: #42b983;
 }
