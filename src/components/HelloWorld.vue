@@ -54,40 +54,38 @@ export default {
     return {
       tableData: [],
       options: [],
-
-
       selects: [{id: 1, name: 'yxf'}, {id: 2, name: 'zy'}],
       selected: 1
     }
   },
   created(){
-    this.$api.post('/tableList').then(json=>{
-      this.tableData = json.data.data;
+    this.$http.getTableList().then(json=>{
+      this.tableData = json.data.data
     })
-    this.$api.get('/getFoods').then(json=>{
-      this.options = json.data.data;
+    this.$http.getFoods().then(json=>{
+      this.options = json.data.data
     })
   },
   methods: {
     test(){
-      let lastSelected = '';
+      let lastSelected = ''
       if(this.selected){
         this.selects.forEach(element=>{
           if(element.id == this.selected){
-            lastSelected = element;
-            return false;
+            lastSelected = element
+            return false
           }
         })
       }
 
-      this.selects = [lastSelected];
-      let arr = [{id: 3, name: 'zs'}, {id: 4, name: 'ls'}];
+      this.selects = [lastSelected]
+      let arr = [{id: 3, name: 'zs'}, {id: 4, name: 'ls'}]
       arr.forEach(element=>{
-        this.selects.push(element);
+        this.selects.push(element)
       })
     },
     submit(){
-      console.log(this.selected);
+      console.log(this.selected)
     }
   },
   name: 'HelloWorld',

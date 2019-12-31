@@ -6,8 +6,8 @@ import './mock/mock'
 
 Vue.config.productionTip = false
 
-import api from './http/api'
-Vue.prototype.$api = api
+import http from './http/http'
+Vue.prototype.$http = http
 
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'

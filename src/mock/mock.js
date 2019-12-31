@@ -38,7 +38,6 @@ Mock.mock('/tableList', /post/, ()=>{
     }
     list.push(listObject)
   }
-  console.log(list);
   return {
     data: list
   }
@@ -54,7 +53,6 @@ Mock.mock('/getFoods', /get/, ()=>{
       label: name
     });
   }
-  console.log(foods);
   return {
     data: foods
   }
