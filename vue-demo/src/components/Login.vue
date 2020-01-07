@@ -14,7 +14,7 @@
         <div class="tab-header">
           <ul>
             <li :class="{activeLi: isShowModule}" @click="isShowModule = true">登录</li>
-            <li :class="{activeLi: !isShowModule}" @click="isShowModule = false">注册</li>
+            <!-- <li :class="{activeLi: !isShowModule}" @click="isShowModule = false">注册</li> -->
           </ul>
         </div>
         <div class="tab-content">
@@ -130,6 +130,8 @@ export default {
     height: 350px;
     margin-top: 80px;
     border-radius: 5px;
+
+    height: 300px;
   }
   .tab-header ul{
     overflow: hidden;
@@ -138,13 +140,14 @@ export default {
     border-bottom: 1px solid #ccc;
   }
   .tab-header ul li:first-child{
-    border-right: 1px solid #ccc;
+    /* border-right: 1px solid #ccc; */
   }
   .tab-header ul li{
     float: left;
     list-style: none;
     width: 49%;
     cursor: pointer;
+    width: 100%;
   }
   .tab-header ul .activeLi{
     color: blue;
