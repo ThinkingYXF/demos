@@ -9,6 +9,12 @@ Vue.config.productionTip = false
 import http from './http/http'
 Vue.prototype.$http = http
 
+//mint-ui
+import MintUi from 'mint-ui'
+import 'mint-ui/lib/style.css'
+Vue.use(MintUi)
+
+//elementUI
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 Vue.use(ElementUI)
