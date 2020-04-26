@@ -9,6 +9,12 @@ let http = {
   },
   getFoods(params){
     return api.get('/getFoods', params)
+  },
+  getCategory(params){
+    return api.post('/getCategory', params)
+  },
+  getCategoryDetail(params){
+    return api.post('/getCategoryDetail', params)
   }
 }
 

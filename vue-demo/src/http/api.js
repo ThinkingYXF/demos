@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { Message } from 'element-ui'
+import { MessageBox } from 'mint-ui';
 
 let api = axios.create({
   //公共url(前置url)
@@ -24,12 +24,12 @@ api.interceptors.response.use(function (response) {
   if(response.status == 200){
     //TODO:
   }else{
-    Message.error('系统错误，请联系管理员')
+    MessageBox.alert('系统错误，请联系管理员')
   }
   return response
 }, function (error) {
   // 对响应错误做点什么
-  Message.error('系统错误，请联系管理员')
+  MessageBox.alert('系统错误，请联系管理员')
   return Promise.reject(error)
 })
 

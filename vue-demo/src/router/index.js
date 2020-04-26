@@ -2,26 +2,24 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 Vue.use(VueRouter)
 
+//点击同一路由报错解决办法
 const VueRouterPush = VueRouter.prototype.push 
 VueRouter.prototype.push = function push (to) {
     return VueRouterPush.call(this, to).catch(err => err)
 }
 
-
-
 const Login = ()=> import('../components/Login.vue')
 const HelloWorld = ()=> import('../components/HelloWorld.vue')
-const Home = ()=> import('../pages/home.vue')
 
-const First = ()=> import('../pages/first/first.vue')
-const Second = ()=> import('../pages/second/second.vue')
-const Third = ()=> import('../pages/third/third.vue')
-const Fourth = ()=> import('../pages/fourth/fourth.vue')
+const Home = ()=> import('../pages/home/home.vue')
+const Category = ()=> import('../pages/category/category.vue')
+const Cart = ()=> import('../pages/cart/cart.vue')
+const Settings = ()=> import('../pages/settings/settings.vue')
 
 
 const routes = [{
   path: '/',
-  component: First
+  component: Home
 },{
   path: '/login',
   component: Login
@@ -29,20 +27,17 @@ const routes = [{
   path: '/hello',
   component: HelloWorld
 },{
-  path: '/home',
+  path: '/home', 
   component: Home
 },{
-  path: '/first', 
-  component: First
+  path: '/category', 
+  component: Category
 },{
-  path: '/second', 
-  component: Second
+  path: '/cart', 
+  component: Cart
 },{
-  path: '/third', 
-  component: Third
-},{
-  path: '/fourth', 
-  component: Fourth
+  path: '/settings', 
+  component: Settings
 }]
 
 const router = new VueRouter({

@@ -42,7 +42,6 @@ Mock.mock('/tableList', /post/, ()=>{
     data: list
   }
 });
-
 Mock.mock('/getFoods', /get/, ()=>{
   let foods = [];
   for(let i = 0; i < 4; i++){
@@ -56,4 +55,30 @@ Mock.mock('/getFoods', /get/, ()=>{
   return {
     data: foods
   }
-})
+});
+
+//分类左侧
+Mock.mock('/getCategory', /post/, ()=>{
+  let list = [];
+  for (let i = 0; i < 3; i++) {
+    let listObject = {
+      id: Random.increment(),
+      name: Random.ctitle(2, 4)
+    }
+    list.push(listObject)
+  }
+  return {
+    data: list
+  }
+});
+//分类右侧
+Mock.mock('/getCategoryDetail', /post/, ()=>{
+  let detail = {
+    id: Random.increment(),
+    title: '',
+    imgUrl: Random.dataImage('300x150')
+  }
+  return {
+    data: detail
+  }
+});

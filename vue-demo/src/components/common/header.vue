@@ -16,7 +16,8 @@ export default {
         width: 100%;
         min-width: 320px;
         max-width: 540px;
-        height: 44px;
+        box-sizing: border-box;
+        height: 45px;
         text-align: center;
         background: #fff;
         border-bottom: 1px solid #f7f7f7;
