@@ -59,26 +59,56 @@ Mock.mock('/getFoods', /get/, ()=>{
 
 //分类左侧
 Mock.mock('/getCategory', /post/, ()=>{
-  let list = [];
-  for (let i = 0; i < 3; i++) {
-    let listObject = {
-      id: Random.increment(),
-      name: Random.ctitle(2, 4)
-    }
-    list.push(listObject)
-  }
+  let list = getList(3, {
+    imgUrl: 'dataImage',
+    name: 'ctitle'
+  });
   return {
     data: list
   }
 });
 //分类右侧
 Mock.mock('/getCategoryDetail', /post/, ()=>{
+  let itemList = getList(null, {
+    imgUrl: 'dataImage',
+    name: 'ctitle',
+  });
+  let list = getList(null, {
+    itemList: itemList,
+    title: 'ctitle',
+  });
   let detail = {
     id: Random.increment(),
-    title: '',
-    imgUrl: Random.dataImage('300x150')
+    imgUrl: Random.dataImage('300x150'),
+    rightList: list,
   }
   return {
     data: detail
   }
 });
+
+function getList(length, attrs){
+  if(length == null){
+    length = Math.ceil(Math.random()*4);
+  }
+  let list = [];
+  for(let k = 0; k < length; k++){
+    let listObject = {
+      id: Random.increment()
+    }
+    for(let attr in attrs){
+      if(Random[attrs[attr]]){
+        if(attr.indexOf('imgUrl') != -1){
+          listObject[attr] = Random[attrs[attr]]('300x150');
+        }else{
+          listObject[attr] = Random[attrs[attr]](4);
+        }
+      }else{
+        listObject[attr] = attrs[attr];
+      }
+      
+    }
+    list.push(listObject)
+  }
+  return list;
+}

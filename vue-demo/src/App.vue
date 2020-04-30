@@ -24,6 +24,7 @@ body{
   color: #2c3e50;
   /* margin-top: 60px; */
   height: 100%;
+  font-size: 14px;
 }
 body,html,
 dd,dl,dt,

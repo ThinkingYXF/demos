@@ -12,10 +12,24 @@
                 </ul>
             </div>
             <div class="rightContent">
-                <div>
+                <div class="rightImg">
                     <img :src="imgUrl" alt="">
                 </div>
-                <div class=""></div>
+                <div class="rightList" v-for="(item, idx) in rightList" :key="idx">
+                    <div>
+                        <div class="rightListTitle">{{item.title}}</div>
+                        <div class="more">更多 > </div>
+                    </div>
+                    
+                    <div class="clear"></div>
+                    <ul>
+                        <li v-for="(good, i) in item.itemList" :key="i">
+                            <img :src="good.imgUrl" alt="">
+                            <br>
+                            <span>{{good.name}}</span>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </section>
         <v-footer></v-footer>
@@ -33,7 +47,8 @@ export default {
         return {
             categoryList: [],
             leftIndex: 0,
-            imgUrl: ''
+            imgUrl: '',
+            rightList: []
         }
     },
     created: function(){
@@ -55,6 +70,7 @@ export default {
             this.$http.getCategoryDetail().then(res=>{
                 if(res.data.data){
                     this.imgUrl = res.data.data.imgUrl;
+                    this.rightList = res.data.data.rightList;
                 }
                 
             });
@@ -63,6 +79,9 @@ export default {
 }
 </script>
 <style scoped>
+    .clear{
+        clear: both;
+    }
     .content{
         display: flex;
         flex: 1;
@@ -70,7 +89,7 @@ export default {
     }
     .leftContent{
         box-sizing: border-box;
-        width: 80px;
+        width: 75px;
         border-right: 1px solid #ccc;
         overflow-y: auto;
         background: #f8f8f8;
@@ -90,7 +109,45 @@ export default {
     
     .rightContent{
         flex: 1;
-        padding-top: 10px;
-        margin-left: 10px;
+        margin: 10px;
+        text-align: left;
+        overflow-y: auto;
+    }
+    .rightImg > img{
+        width: 100%;
+    }
+    .rightList{
+        margin-top: 10px;
+        overflow: hidden;
+    }
+    .rightList .rightListTitle{
+        float: left;
+    }
+    .rightList .more{
+        float: right;
+        color: #bbb;
+    }
+    .rightList ul{
+        display: flex;
+        flex-flow: row wrap;
+        /* justify-content: space-between; */
+    }
+    /* .rightList ul:after {
+        content: "";
+        flex: auto;
+    } */
+    .rightList ul li{
+        list-style: none;
+        text-align: center;
+        height: 100px;
+        margin-right: 5px;
+    }
+    .rightList ul li > img{
+        width: 100px;
+        height: 50px;
+    }
+    .rightList ul li > span{
+        display: block;
+        margin-top: 5px;
     }
 </style>
