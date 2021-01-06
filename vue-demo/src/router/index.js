@@ -8,13 +8,13 @@ VueRouter.prototype.push = function push (to) {
     return VueRouterPush.call(this, to).catch(err => err)
 }
 
-const Login = ()=> import('../components/Login.vue')
-const HelloWorld = ()=> import('../components/HelloWorld.vue')
+const Login = ()=> import('@/pages/test/Login.vue')
+const HelloWorld = ()=> import('@/pages/test/HelloWorld.vue')
 
-const Home = ()=> import('../pages/home/home.vue')
-const Category = ()=> import('../pages/category/category.vue')
-const Cart = ()=> import('../pages/cart/cart.vue')
-const Settings = ()=> import('../pages/settings/settings.vue')
+const Home = ()=> import('@/pages/home/home.vue')
+const Category = ()=> import('@/pages/category/category.vue')
+const Cart = ()=> import('@/pages/cart/cart.vue')
+const Settings = ()=> import('@/pages/settings/settings.vue')
 
 
 const routes = [{

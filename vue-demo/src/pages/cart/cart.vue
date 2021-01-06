@@ -28,7 +28,10 @@ export default {
     components: {
         'v-header': Header,
         'v-footer': Footer
-    }
+    },
+    created(){
+    
+    },
 }
 </script>
 <style scoped>

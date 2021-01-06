@@ -3,6 +3,7 @@ import { MessageBox } from 'mint-ui';
 
 let api = axios.create({
   //公共url(前置url)
+  // baseURL: 'http://192.168.0.103:8088/',
   baseURL: '',
   headers: {
 

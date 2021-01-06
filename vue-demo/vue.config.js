@@ -46,10 +46,21 @@ module.exports = {
     open: process.platform === 'darwin',
     host: '0.0.0.0',
     port: 8080,
-    https: false,
+    https: false, //本地启动是否是https协议
     hotOnly: false,
     // See https://github.com/vuejs/vue-cli/blob/dev/docs/cli-service.md#configuring-proxy
-    proxy: null, // string | Object
+    // proxy: {  //配置跨域
+    //   '/api': {
+    //     // target: 'http://192.168.0.103:8088/',  //这里后台的地址模拟的;应该填写你们真实的后台接口
+    //     target: 'https://omstestgl.skyallhere.com/',  //这里后台的地址模拟的;应该填写你们真实的后台接口
+    //     // secure: true,  //是否需要检查证书
+    //     // ws: false,
+    //     changOrigin: true,  //允许跨域
+    //     // pathRewrite: {
+    //     //   '^/api': ''  //请求的时候使用这个api就可以
+    //     // }
+    //   }
+    // },
     before: app => {}
   },
 

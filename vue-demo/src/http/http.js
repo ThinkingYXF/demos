@@ -15,6 +15,9 @@ let http = {
   },
   getCategoryDetail(params){
     return api.post('/getCategoryDetail', params)
+  },
+  testKY(params){
+    return api.post('/api/login', params)
   }
 }
 
